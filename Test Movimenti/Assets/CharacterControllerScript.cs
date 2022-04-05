@@ -21,9 +21,6 @@ public class CharacterControllerScript : MonoBehaviour
  
     private void movePlayer(){
         //Vector3 moveVector = transform.TransformDirection(PlayerMovementInput);
-      
-        
-
         if(controller.isGrounded){
             Velocity.y=-1f;
             if(Input.GetKeyDown(KeyCode.Space)||Input.GetKeyDown("joystick button 0") )
@@ -57,6 +54,9 @@ public class CharacterControllerScript : MonoBehaviour
          transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.back), 10f * Time.deltaTime);*/
     if(!(xLook==0 && zLook==0))
         transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(xLook,0f,zLook)), 10f * Time.deltaTime);
+    else if(!(xMove==0 && zMove==0))
+        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(xMove,0f,zMove)), 10f * Time.deltaTime);
+    
     }
     private void Awake(){
         animator=GetComponent<Animator>();
