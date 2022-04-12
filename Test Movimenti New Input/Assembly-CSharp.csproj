@@ -58,9 +58,11 @@
   <ItemGroup>
     <Compile Include="Assets\Script_Move\CharacterControllerScript.cs" />
     <Compile Include="Assets\Script_Move\PlayerControls.cs" />
+    <Compile Include="Assets\Scripts_Weapon\Projectile.cs" />
     <Compile Include="Assets\Script_Move\RangedWeaponController.cs" />
     <Compile Include="Assets\Scripts_Weapon\RangedWeapon.cs" />
-    <Compile Include="Assets\Scripts_Weapon\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Interactable.cs" />
+    <Compile Include="Assets\Scripts\PedestalBehaviour.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Assets\FreeWeapons\Read_me.txt" />

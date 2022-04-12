@@ -33,8 +33,8 @@ public class CharacterControllerScript : MonoBehaviour
     private Vector2 inputLeft;
     private Vector2 inputRight;
 
-    //just for testing purposes. This will be deleted
-    [SerializeField] Transform rangedWeapon2SetAsChild;
+    //miscellanous handler
+    private bool hasPressedInteractButton;
 
     private void MovePlayer()
     {
@@ -63,15 +63,7 @@ public class CharacterControllerScript : MonoBehaviour
 
     void Rotate()
     {
-        //Debug.Log("x:"+xLook+" y:"+zLook);
-        /*if (xLook > 0)
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), 10f * Time.deltaTime);
-        else if (xLook < 0)
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.left), 10f * Time.deltaTime);
-        if (zLook > 0)
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), 10f * Time.deltaTime);
-        else if (zLook < 0)
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.back), 10f * Time.deltaTime);*/
+        
         if (!(xLook == 0 && zLook == 0))
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(new Vector3(xLook, 0f, zLook)), 10f * Time.deltaTime);
         else if (!(xMove == 0 && zMove == 0))
@@ -96,9 +88,12 @@ public class CharacterControllerScript : MonoBehaviour
         controls.Gameplay.Shoot.performed += ctx => isShooting = true;
         controls.Gameplay.Shoot.canceled += ctx => isShooting = false;
 
-        //just a test
-        rangedWeapon2SetAsChild.SetParent(transform);
-        //rangedWeapon2SetAsChild.Translate(transform.position, Space.World);
+        //miscellaneous input inizialization
+        //controls.Gameplay.Interact.started += ctx => hasPressedInteractButton = !hasPressedInteractButton;
+        controls.Gameplay.Interact.started += ctx => hasPressedInteractButton = true;
+        controls.Gameplay.Interact.canceled += ctx => hasPressedInteractButton = false;
+
+
     }
 
     private void OnEnable() => controls.Enable();
@@ -113,7 +108,6 @@ public class CharacterControllerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("x " + inputLeft.x + " y " + inputLeft.y);
         xMove = inputLeft.x;
         zMove = inputLeft.y;
         xLook = inputRight.x;
@@ -130,4 +124,6 @@ public class CharacterControllerScript : MonoBehaviour
     {
         if (isShooting) rangedWeaponController.Shoot();
     }
+
+    public bool HasPressedInteractButton() => hasPressedInteractButton;
 }

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class RangedWeaponController : MonoBehaviour
 {
-    [SerializeField] RangedWeapon rangedWeapon;
+    [SerializeField] Transform snappingPoint;
+    
+    RangedWeapon heldWeapon;
 
-    public void PickAndEquipRangedWeapon()
-    {
-        //TODO(Giuseppe): implementare sistema di equipaggiamento armi a distanza
-    }
+    //action to be invoked in pedestal's interactable script
+    public void PickAndEquipRangedWeapon() => heldWeapon = GetComponentInChildren<RangedWeapon>();
 
-    public void Shoot() => rangedWeapon?.Shoot();
+    public void Shoot() => heldWeapon?.Shoot();
 }
